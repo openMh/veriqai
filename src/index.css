@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-bg-primary: #0f172a;
+    /* Slate 900 - Deep background */
+    --color-bg-secondary: #1e293b;
+    /* Slate 800 - Panels */
+    --color-accent: #38bdf8;
+    /* Sky 400 - Accent */
+    --color-text-primary: #f8fafc;
+    /* Slate 50 */
+    --color-text-secondary: #94a3b8;
+    /* Slate 400 */
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-50 antialiased;
+    font-family: 'Inter', sans-serif;
+    /* Modern typography */
+    background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+    /* Deep purple to slate gradient */
+    min-height: 100vh;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-600;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-2xl shadow-xl;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all duration-200 shadow-lg shadow-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-icon {
+    @apply p-2 rounded-lg hover:bg-slate-700/50 text-slate-400 hover:text-white transition-colors;
+  }
+
+  .input-field {
+    @apply w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 placeholder-slate-500;
+  }
+}
+
+/* Animations */
+@keyframes message-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-message {
+  animation: message-slide-in 0.3s ease-out forwards;
+}
+
+.typing-dot {
+  @apply w-1.5 h-1.5 bg-slate-400 rounded-full animate-bounce;
+}
