@@ -64,9 +64,14 @@ const ChatPage = () => {
     };
 
     const handleSendMessage = async (content) => {
-        if (!settings.apiKey) {
+        const provider = settings.provider || 'openai';
+        const hasEnvKey = provider === 'google'
+            ? !!import.meta.env.VITE_GEMINI_API_KEY
+            : !!import.meta.env.VITE_OPENAI_API_KEY;
+
+        if (!settings.apiKey && !hasEnvKey) {
             setIsSettingsOpen(true);
-            alert("Please enter your OpenAI API Key in settings.");
+            alert(`Please enter your ${provider === 'google' ? 'Gemini' : 'OpenAI'} API Key in settings, or configure it on the server.`);
             return;
         }
 

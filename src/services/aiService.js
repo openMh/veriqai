@@ -6,8 +6,11 @@ import { Bot } from 'lucide-react';
 */
 
 export const fetchAIResponse = async (messages, apiKey, model = 'gpt-3.5-turbo', provider = 'openai') => {
-    if (!apiKey) {
-        throw new Error('API Key is missing. Please add it in Settings.');
+    // Falls back to environment variables if no user key is provided
+    const finalApiKey = apiKey || (provider === 'google' ? import.meta.env.VITE_GEMINI_API_KEY : import.meta.env.VITE_OPENAI_API_KEY);
+
+    if (!finalApiKey) {
+        throw new Error(`API Key is missing for ${provider}. Please add it in Settings or configure VITE_${provider === 'google' ? 'GEMINI' : 'OPENAI'}_API_KEY.`);
     }
 
     // === Google Gemini API Logic ===
@@ -20,7 +23,7 @@ export const fetchAIResponse = async (messages, apiKey, model = 'gpt-3.5-turbo',
         const lastMessage = messages[messages.length - 1].content;
 
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${finalApiKey}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +83,7 @@ export const fetchAIResponse = async (messages, apiKey, model = 'gpt-3.5-turbo',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
+                'Authorization': `Bearer ${finalApiKey}`
             },
             body: JSON.stringify({
                 model: model,

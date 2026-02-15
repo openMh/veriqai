@@ -87,6 +87,11 @@ const SettingsModal = ({ isOpen, onClose, settings, onSave }) => {
                         />
                         <p className="text-xs text-slate-500">
                             Your key is stored locally in your browser and never sent to our servers.
+                            {(provider === 'google' ? !!import.meta.env.VITE_GEMINI_API_KEY : !!import.meta.env.VITE_OPENAI_API_KEY) && (
+                                <span className="block mt-1 text-green-400">
+                                    ✓ A default API key is configured on the server. You can override it here.
+                                </span>
+                            )}
                         </p>
                     </div>
 
