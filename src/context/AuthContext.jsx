@@ -17,8 +17,8 @@ export const AuthProvider = ({ children }) => {
 
     const login = (email, password) => {
         // Hardcoded demo credentials
-        if (email === 'admin@example.com' && password === 'admin123') {
-            const userData = { email, role: 'admin', name: 'Admin User' };
+        if (email === 'openaimh@gmail.com' && password === 'admin123') {
+            const userData = { email, role: 'admin', name: 'OpenAI MH' };
             setUser(userData);
             localStorage.setItem('chat_user', JSON.stringify(userData));
             return true;

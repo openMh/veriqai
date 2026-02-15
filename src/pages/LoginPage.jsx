@@ -22,7 +22,7 @@ const LoginPage = () => {
             if (success) {
                 navigate('/admin');
             } else {
-                setError('Invalid credentials. Try admin@example.com / admin123');
+                setError('Invalid credentials. Please use your configured email and password.');
             }
             setIsLoading(false);
         }, 800);
@@ -55,7 +55,7 @@ const LoginPage = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="input-field pl-10"
-                                placeholder="admin@example.com"
+                                placeholder="openaimh@gmail.com"
                                 required
                             />
                         </div>
